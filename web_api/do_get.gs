@@ -1,4 +1,4 @@
-//HTTP GETをハンドリングする
+//HTTP GETをハンドリングする 
 function doGet(e){
 
   //リクエストパラメータ名"id"の値を取得する
