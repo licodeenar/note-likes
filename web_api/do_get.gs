@@ -9,7 +9,8 @@ function doGet(e){
 
   try{
     if(paramID !== '' &&
-     (paramKey === 'article60' || 
+     (paramKey === 'article12' || 
+      paramKey === 'article60' || 
       paramKey === 'article120' || 
       paramKey === 'article240')){
       
