@@ -8,7 +8,7 @@ function debug(){
 }
 
 function main(paramID, paramKey){
-  //パラメーターをセット
+  //パラメーターをセット 
   let maxRepeat = CONF.MAX_REPEAT;
   let maxFetch = CONF.FETCH_MAX;
   let apiURL = CONF.API_URL;
