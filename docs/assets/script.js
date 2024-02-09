@@ -50,8 +50,9 @@ function drawTable(jasons, elementId, isJson) {
                 html += '<tr><td class="note_data_id">' +
                     (i + 1) + '位</td>' + 
                     '<td>' +
-                    '<a href="' + obj[i].url + '" target="_blank">' + obj[i].urlname + '</a><br>' + 
-                    '<div class="note_data_name">' + obj[i].nickname + '</div>' +
+                    '<a href="' + obj[i].url + '" target="_blank">' + obj[i].nickname + '</a><br>' + 
+                    '<div class="note_data_name">' + obj[i].urlname + '</div>' +
+                    //---
                     '<div class="detail">&lt;&lt; <a href="javascript:setDisplay(\'articles_' + i + '\');">詳しくみる</a></div>' +
                     '<div class="article_list" id="articles_' + i + '">' + getArticles(obj[i].articles) + '</div>' + 
                     '</td>' + 
