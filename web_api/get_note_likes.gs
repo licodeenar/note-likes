@@ -8,7 +8,7 @@ function debug(){
 }
 
 function main(paramID, paramKey){
-  //パラメーターをセット 
+  //パラメーターをセット
   let maxRepeat = CONF.MAX_REPEAT;
   let maxFetch = CONF.FETCH_MAX;
   let apiURL = CONF.API_URL;
@@ -112,7 +112,8 @@ function likeUserRanking(noteURL, articles){
           json_data['likes'][j].user.urlname, 
           json_data['likes'][j].user.nickname,
           articleURLs[i][0],
-          articleURLs[i][2]);
+          articleURLs[i][2],
+          json_data['likes'][j].user.user_profile_image_path);
       }
     }
   }
@@ -128,7 +129,7 @@ function likeUserRanking(noteURL, articles){
 
 // --------------------------------------------------
 // 集計リストを作成する
-function pushList(list, key, name, articleURL, title){
+function pushList(list, key, name, articleURL, title, imagePath){
   let isExist = false;
   for(let i = 0; i < list.length; i++){
     if(list[i][0] === key){
@@ -143,7 +144,7 @@ function pushList(list, key, name, articleURL, title){
     //見つからなかったら追加
     let articles = [];
     articles.push([articleURL, title]);
-    list.push([key, name, 1, articles]);
+    list.push([key, name, 1, articles, imagePath]);
   }
   return list;
 }
@@ -162,6 +163,7 @@ function likeListJSON(list){
       urlname: list[i][0],
       nickname: list[i][1],
       url: 'https://note.com/' + list[i][0],
+      userProfileImagePath: list[i][4],
       count:  list[i][2],
       articles: articleListJSON(list[i][3])
     });
