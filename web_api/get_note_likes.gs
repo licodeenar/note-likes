@@ -120,7 +120,7 @@ function likeUserRanking(noteURL, articles){
   
   //LIKE数順にソート
   likeList.sort( (a, b) => {
-    return b[b.length - 2] - a[a.length - 2];
+    return b[b.length - 3] - a[a.length - 3];
   });
 
   // JSONで結果を返す
