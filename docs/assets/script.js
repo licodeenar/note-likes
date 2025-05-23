@@ -34,6 +34,7 @@ function setFormDisabled(lock) {
 }
 
 function drawTable(jasons, elementId, isJson) {
+    const form = document.getElementById('setting');
     let obj;
     let html = '';
 
