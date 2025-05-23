@@ -55,7 +55,6 @@ function drawTable(jasons, elementId, isJson) {
                     '<img class="note_icon_img" src="' + obj[i].userProfileImagePath + '"></a></div>' + 
                     '<div class="note_username">' + 
                     '<div class="note_username_nickname"><a href="' + obj[i].url + '" target="_blank">' + obj[i].nickname + '</a></div>' + 
-                    '<div class="note_data_name">' + obj[i].urlname + '</div>' +
                     '<div class="note_data_name"><a href="?id=' + obj[i].urlname + '&key=' + form.note_key.value + '">' + obj[i].urlname + '</a></div>'
                     '</div></div>' +
                     '<div class="detail">&lt;&lt; <a href="javascript:setDisplay(\'articles_' + i + '\');">詳しくみる</a></div>' +
