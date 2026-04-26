@@ -12,7 +12,11 @@ function main(paramID, paramKey){
   const cache = CacheService.getScriptCache();
   const cacheKey = paramID + '_' + paramKey;
   const cached = cache.get(cacheKey);
-  if (cached) return JSON.parse(cached);
+  if (cached) {
+    console.log('cache hit: ' + cacheKey);
+    return JSON.parse(cached);
+  }
+  console.log('cache miss: ' + cacheKey);
 
   //パラメーターをセット
   let maxRepeat = CONF.MAX_REPEAT;
