@@ -59,7 +59,7 @@ function drawTable(jasons, elementId, isJson) {
                     '<div class="note_data_name">' + obj[i].urlname + '</div>' +
                     '</div></div>' +
                     '<div class="detail"><div style="display:flex;justify-content:space-between;align-items:flex-start;">' +
-                    '<div style="display:flex;flex-direction:column;align-items:flex-start;gap:2px;">' +
+                    '<div class="btn-group">' +
                     '<a class="btn-sub" href="?id=' + obj[i].urlname + '&key=' + form.note_key.value + '">このユーザで集計</a>' +
                     '<a class="btn-sub" href="compare.html?id_a=' + form.note_id.value + '&id_b=' + obj[i].urlname + '">共通スキを探す</a>' +
                     '</div>' +
