@@ -82,7 +82,7 @@ function drawResult(dataA, dataB, idA, idB, elementId) {
     }
 
     let html = '<table class="note_list">';
-    html += '<tr><th>なまえ / ID</th><th>' + idA + '</th><th>' + idB + '</th><th>一致率</th></tr>';
+    html += '<tr><th>なまえ / ID</th><th>一致率</th></tr>';
 
     for (const u of common) {
         const rate = Math.round(u.matchRate * 100);
@@ -99,8 +99,6 @@ function drawResult(dataA, dataB, idA, idB, elementId) {
             '<a href="index.html?id=' + u.urlname + '&key=article12">[このユーザで集計]</a>' +
             '</div>' +
             '</td>' +
-            '<td class="note_data_count">' + u.countA + '/12</td>' +
-            '<td class="note_data_count">' + u.countB + '/12</td>' +
             '<td class="note_data_count">' + rate + '%</td>' +
             '</tr>';
     }
