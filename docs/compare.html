@@ -31,16 +31,18 @@
                 <input type="button" class="cp_button" id="compare_exe" value="共通スキを探す" onclick="getCompare()"><br>
             </form>
             <script>
-                const params = new URLSearchParams(window.location.search);
-                const idA = params.get('id_a');
-                const idB = params.get('id_b');
-                if (idA) document.getElementById('note_id_a').value = idA;
-                if (idB) document.getElementById('note_id_b').value = idB;
-                if (idA && idB) {
-                    getCompare();
-                } else {
-                    document.getElementById('note_id_a').focus();
-                }
+                window.onload = function() {
+                    const params = new URLSearchParams(window.location.search);
+                    const idA = params.get('id_a');
+                    const idB = params.get('id_b');
+                    if (idA) document.getElementById('note_id_a').value = idA;
+                    if (idB) document.getElementById('note_id_b').value = idB;
+                    if (idA && idB) {
+                        getCompare();
+                    } else {
+                        document.getElementById('note_id_a').focus();
+                    }
+                };
             </script>
 
             <div id="compare_result" class="result-table"></div>
