@@ -251,6 +251,10 @@ img.like_icon {
     text-decoration: none;
 }
 
+.detail-more {
+    white-space: nowrap;
+}
+
 .btn-sub {
     display: inline-block;
     background: #f0f0f0;
