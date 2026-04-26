@@ -8,6 +8,12 @@ function debug(){
 }
 
 function main(paramID, paramKey){
+  // キャッシュを確認
+  const cache = CacheService.getScriptCache();
+  const cacheKey = paramID + '_' + paramKey;
+  const cached = cache.get(cacheKey);
+  if (cached) return JSON.parse(cached);
+
   //パラメーターをセット
   let maxRepeat = CONF.MAX_REPEAT;
   let maxFetch = CONF.FETCH_MAX;
@@ -35,7 +41,12 @@ function main(paramID, paramKey){
   const articles = getArticles(apiURL, maxRepeat, maxFetch);
 
   //LIKE ランキングを取得
-  return likeUserRanking(noteURL, articles);
+  const result = likeUserRanking(noteURL, articles);
+
+  // 結果をキャッシュに保存（30分）
+  cache.put(cacheKey, JSON.stringify(result), 1800);
+
+  return result;
 }
 
 // --------------------------------------------------
