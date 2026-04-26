@@ -95,8 +95,9 @@ function drawResult(dataA, dataB, idA, idB, elementId) {
             '<div class="note_username_nickname"><a href="' + u.url + '" target="_blank">' + u.nickname + '</a></div>' +
             '<div class="note_data_name">' + u.urlname + '</div>' +
             '</div></div>' +
-            '<div class="detail">' +
+            '<div class="detail"><div style="display:flex;justify-content:space-between;">' +
             '<a href="index.html?id=' + u.urlname + '&key=article12">[このユーザで集計]</a>' +
+            '</div></div>' +
             '</div>' +
             '</td>' +
             '<td class="note_data_count">' + rate + '%</td>' +
