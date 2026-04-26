@@ -8,15 +8,17 @@ function debug(){
 }
 
 function main(paramID, paramKey){
-  // キャッシュを確認
+  // article12のみキャッシュを使用
   const cache = CacheService.getScriptCache();
   const cacheKey = paramID + '_' + paramKey;
-  const cached = cache.get(cacheKey);
-  if (cached) {
-    console.log('cache hit: ' + cacheKey);
-    return JSON.parse(cached);
+  if (paramKey === 'article12') {
+    const cached = cache.get(cacheKey);
+    if (cached) {
+      console.log('cache hit: ' + cacheKey);
+      return JSON.parse(cached);
+    }
+    console.log('cache miss: ' + cacheKey);
   }
-  console.log('cache miss: ' + cacheKey);
 
   //パラメーターをセット
   let maxRepeat = CONF.MAX_REPEAT;
@@ -47,11 +49,13 @@ function main(paramID, paramKey){
   //LIKE ランキングを取得
   const result = likeUserRanking(noteURL, articles);
 
-  // 結果をキャッシュに保存（30分、100KB制限を超える場合はスキップ）
-  try {
-    cache.put(cacheKey, JSON.stringify(result), 1800);
-  } catch(e) {
-    console.log('cache skip: ' + e.message);
+  // article12のみキャッシュに保存（30分、100KB制限を超える場合はスキップ）
+  if (paramKey === 'article12') {
+    try {
+      cache.put(cacheKey, JSON.stringify(result), 1800);
+    } catch(e) {
+      console.log('cache skip: ' + e.message);
+    }
   }
 
   return result;
