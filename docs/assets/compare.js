@@ -96,7 +96,7 @@ function drawResult(dataA, dataB, idA, idB, elementId) {
             '<div class="note_data_name">' + u.urlname + '</div>' +
             '</div></div>' +
             '<div class="detail"><div style="display:flex;justify-content:space-between;">' +
-            '<a href="index.html?id=' + u.urlname + '&key=article12">[このユーザで集計]</a>' +
+            '<a class="btn-sub" href="index.html?id=' + u.urlname + '&key=article12">[このユーザで集計]</a>' +
             '</div></div>' +
             '</div>' +
             '</td>' +

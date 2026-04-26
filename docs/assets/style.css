@@ -243,6 +243,16 @@ img.like_icon {
     text-decoration: none;
 }
 
+.btn-sub {
+    display: inline-block;
+    background: #f0f0f0;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 1.2rem;
+    color: #555;
+    text-decoration: none;
+}
+
 
 /* インプット */
 
