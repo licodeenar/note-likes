@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+    <title>【note】共通スキユーザーを探す</title>
+
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://licodeenar.github.io/note-likes/img/og-image.png">
+    <meta property="og:title" content="【note】共通スキユーザーを探す">
+    <meta property="og:description" content="2人のnoteユーザーに共通してスキをしているユーザーを探します。">
+    <meta property="og:locale" content="ja_JP">
+    <link rel="icon" href="img/favicon.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link media="all" href="assets/style.css" rel="stylesheet">
+    <script type='text/javascript' src='assets/compare.js'></script>
+</head>
+
+<body>
+    <header>
+        <a href="https://note.com/licodeenar/n/n89744be9ade9"><img class="cp_icon" src="img/favicon.png"></a>
+    </header>
+    <main class="cat_top">
+        <div class="cp_contents">
+            <h1><a href="." style="text-decoration:none;">【note】共通スキを探す</a></h1>
+
+            <form id="setting" action="JavaScript:getCompare()">
+                <input type="text" class="cp_input" id="note_id_a" placeholder="note ID または note URL (1人目)"><br>
+                <input type="text" class="cp_input" id="note_id_b" placeholder="note ID または note URL (2人目)"><br>
+                <input type="button" class="cp_button" id="compare_exe" value="共通スキを探す" onclick="getCompare()"><br>
+            </form>
+            <script>
+                document.getElementById('note_id_a').focus();
+            </script>
+
+            <div id="compare_result" class="result-table"></div>
+
+            <div class="cp_explain">
+                ・2人のnoteユーザーに共通してスキしているユーザーを探します。<br>
+                ・直近12記事をもとに集計します。<br>
+                ・一致率 = 2人合計のスキ数 / 24（最大スキ数）
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L8WE2GBHQ3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag("js", new Date());
+        gtag("config", "G-L8WE2GBHQ3");
+    </script>
+</body>
+
+</html>
