@@ -43,8 +43,12 @@ function main(paramID, paramKey){
   //LIKE ランキングを取得
   const result = likeUserRanking(noteURL, articles);
 
-  // 結果をキャッシュに保存（30分）
-  cache.put(cacheKey, JSON.stringify(result), 1800);
+  // 結果をキャッシュに保存（30分、100KB制限を超える場合はスキップ）
+  try {
+    cache.put(cacheKey, JSON.stringify(result), 1800);
+  } catch(e) {
+    console.log('cache skip: ' + e.message);
+  }
 
   return result;
 }
