@@ -72,7 +72,7 @@ function drawResult(dataA, dataB, idA, idB, elementId) {
         .filter(u => mapA.has(u.urlname))
         .map(u => {
             const uA = mapA.get(u.urlname);
-            return { ...u, countA: uA.count, countB: u.count, matchRate: (uA.count + u.count) / 24 };
+            return { ...u, countA: uA.count, countB: u.count, matchRate: Math.min(uA.count, u.count) / 12 };
         })
         .sort((a, b) => b.matchRate - a.matchRate);
 
