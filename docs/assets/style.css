@@ -464,6 +464,10 @@ input[type=checkbox]:checked + .cp_checkbox_data_json::after {
         flex-direction: column;
         gap: 4px;
     }
+
+    .detail {
+        align-items: flex-end;
+    }
 }
 
 .btn-sub {
