@@ -8,12 +8,12 @@ function getCompare() {
     const idB = extractNoteID(rawB);
 
     if (!idA || !idB) {
-        document.getElementById(resultDispId).innerHTML = 'IDを2つ入力してください。';
+        document.getElementById(resultDispId).innerHTML = '<div class="note_status">IDを2つ入力してください。</div>';
         return;
     }
 
     document.getElementById(resultDispId).innerHTML =
-        '<img src="img/waiting.gif" width="50" height="50"><br>しばらく時間がかかります。。。<br><br><br>';
+        '<div class="note_status note_loading">しばらく時間がかかります。。。</div>';
     setFormDisabled(true);
 
     Promise.all([fetchAPI(idA), fetchAPI(idB)])
@@ -23,19 +23,26 @@ function getCompare() {
         })
         .catch(() => {
             setFormDisabled(false);
-            document.getElementById(resultDispId).innerHTML = '情報を取得できませんでした。<br><br><br>';
+            document.getElementById(resultDispId).innerHTML = '<div class="note_status">情報を取得できませんでした。</div>';
         });
 }
 
 function fetchAPI(id) {
-    const url = 'https://script.google.com/macros/s/' + API_KEY + '/exec?id=' + id + '&key=article12';
+    const url = 'https://script.google.com/macros/s/' + API_KEY +
+        '/exec?id=' + encodeURIComponent(id) + '&key=article12';
     return new Promise((resolve, reject) => {
         const req = new XMLHttpRequest();
         req.open('GET', url, true);
         req.onreadystatechange = function () {
             if (req.readyState === 4) {
                 if (req.status === 200) {
-                    const data = JSON.parse(req.responseText);
+                    let data;
+                    try {
+                        data = JSON.parse(req.responseText);
+                    } catch (e) {
+                        reject(new Error('parse error'));
+                        return;
+                    }
                     if (data === 'error') reject(new Error('API error'));
                     else resolve(data);
                 } else {
@@ -60,9 +67,16 @@ function setFormDisabled(lock) {
     document.getElementById('note_id_b').disabled = lock;
 }
 
+// HTMLに埋め込む値をエスケープ（XSS対策）
+function escapeHtml(str) {
+    return String(str == null ? '' : str).replace(/[&<>"']/g, function(m) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+    });
+}
+
 function drawResult(dataA, dataB, idA, idB, elementId) {
     if (!Array.isArray(dataA) || !Array.isArray(dataB)) {
-        document.getElementById(elementId).innerHTML = '情報を取得できませんでした。<br><br><br>';
+        document.getElementById(elementId).innerHTML = '<div class="note_status">情報を取得できませんでした。</div>';
         return;
     }
 
@@ -77,33 +91,34 @@ function drawResult(dataA, dataB, idA, idB, elementId) {
         .sort((a, b) => b.matchRate - a.matchRate);
 
     if (common.length === 0) {
-        document.getElementById(elementId).innerHTML = '共通のスキユーザーが見つかりませんでした。<br><br><br>';
+        document.getElementById(elementId).innerHTML = '<div class="note_status">共通のスキユーザーが見つかりませんでした。</div>';
         return;
     }
 
-    let html = '<table class="note_list">';
-    html += '<tr><th>なまえ / ID</th><th style="white-space:nowrap;font-size:1.2rem;">一致率</th></tr>';
+    let html = '<div class="note_count">' + common.length + '人</div><ul class="note_list">';
 
     for (const u of common) {
         const rate = Math.round(u.matchRate * 100);
-        html += '<tr>' +
-            '<td>' +
-            '<div class="note_data_container">' +
-            '<div class="note_icon"><a href="' + u.url + '" target="_blank">' +
-            '<img class="note_icon_img" src="' + u.userProfileImagePath + '"></a></div>' +
-            '<div class="note_username">' +
-            '<div class="note_username_nickname"><a href="' + u.url + '" target="_blank">' + u.nickname + '</a></div>' +
-            '<div class="note_data_name">' + u.urlname + '</div>' +
-            '</div></div>' +
-            '<div class="detail"><div style="display:flex;justify-content:space-between;">' +
-            '<a class="btn-sub" href="index.html?id=' + u.urlname + '&key=article12">このユーザで集計</a>' +
-            '</div></div>' +
+        const aggregateUrl = 'index.html?id=' + encodeURIComponent(u.urlname) + '&key=article12';
+        html += '<li class="note_item">' +
+            '<div class="note_row">' +
+            '<a class="note_user" href="' + escapeHtml(u.url) + '" target="_blank" rel="noopener">' +
+            '<img class="note_avatar" src="' + escapeHtml(u.userProfileImagePath) + '" alt="">' +
+            '<span class="note_body">' +
+            '<span class="note_data_name">' + escapeHtml(u.nickname) + '</span>' +
+            '<span class="note_data_id">@' + escapeHtml(u.urlname) + '</span>' +
+            '</span>' +
+            '</a>' +
+            '<span class="note_like_count">' + rate + '%</span>' +
             '</div>' +
-            '</td>' +
-            '<td class="note_data_count">' + rate + '%</td>' +
-            '</tr>';
+            '<div class="detail">' +
+            '<div class="btn-group">' +
+            '<a class="btn-sub" href="' + escapeHtml(aggregateUrl) + '">このユーザで集計</a>' +
+            '</div>' +
+            '</div>' +
+            '</li>';
     }
-    html += '</table>';
+    html += '</ul>';
 
     document.getElementById(elementId).innerHTML = html;
 }
