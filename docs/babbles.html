@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+    <title>【note】共通スキ バブル</title>
+
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://licodeenar.github.io/note-likes/img/og-image-babble.png">
+    <meta property="og:title" content="【note】共通スキのつながり Babbles">
+    <meta property="og:description" content="noteユーザー同士の共通スキのつながりをバブルで可視化します。">
+    <meta property="og:locale" content="ja_JP">
+    <link rel="icon" href="https://github.com/licodeenar.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link media="all" href="assets/style.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script type='text/javascript' src='assets/babbles.js'></script>
+</head>
+
+<body>
+    <header>
+        <a href="https://licodeenar.github.io/"><img class="cp_icon" src="https://github.com/licodeenar.png" alt="licodeenar"></a>
+    </header>
+    <main class="babble_stage">
+        <div id="babble_graph" class="babble_graph"></div>
+
+        <div class="babble_panel" id="babble_panel">
+            <div class="babble_panel_header">
+                <h1><a href="." style="text-decoration:none;">【note】共通スキ バブル</a></h1>
+                <button type="button" class="babble_panel_toggle" id="babble_panel_toggle"
+                    aria-expanded="true" aria-controls="babble_panel_body" aria-label="折りたたむ"
+                    onclick="toggleBabblePanel()">
+                    <span class="babble_panel_chevron">▾</span>
+                </button>
+            </div>
+
+            <div class="babble_panel_body" id="babble_panel_body">
+                <form id="setting" action="JavaScript:getBabbles()">
+                    <input type="text" class="cp_input" id="note_id" placeholder="note ID または note URL"><br>
+                    <input type="button" class="cp_button" id="babble_exe" value="バブルを表示する" onclick="getBabbles()"><br>
+                </form>
+
+                <div id="babble_status"></div>
+
+                <ul class="cp_explain">
+                    <li>直近12記事にスキをくれた上位25人をバブルで表示します。</li>
+                    <li>追加でバブルをクリックすると、「共通スキ」ユーザーを更に展開します。</li>
+                </ul>
+            </div>
+        </div>
+        <script>
+            window.onload = function() {
+                const params = new URLSearchParams(window.location.search);
+                const id = params.get('id');
+                if (id) {
+                    document.getElementById('note_id').value = id;
+                    getBabbles();
+                } else {
+                    document.getElementById('note_id').focus();
+                }
+            };
+        </script>
+    </main>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L8WE2GBHQ3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag("js", new Date());
+        gtag("config", "G-L8WE2GBHQ3");
+    </script>
+</body>
+
+</html>

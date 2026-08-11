@@ -510,3 +510,182 @@ input[type=checkbox]:checked + .cp_checkbox_data_json::after {
     padding: 16px;
     word-break: break-all;
 }
+
+/* Babbles（つながりグラフ） */
+
+.babble_stage {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 61px);
+    min-height: 480px;
+    margin: 0;
+    padding: 0;
+    max-width: none;
+    overflow: hidden;
+}
+
+.babble_graph {
+    position: absolute;
+    inset: 0;
+    background: var(--bg);
+    z-index: 0;
+}
+
+.babble_graph svg {
+    display: block;
+}
+
+.babble_panel {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 2;
+    width: min(380px, calc(100vw - 40px));
+    max-height: calc(100% - 40px);
+    overflow-y: auto;
+    box-sizing: border-box;
+    text-align: left;
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+}
+
+.babble_panel_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.babble_panel_header h1 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.babble_panel_toggle {
+    flex: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text-sub);
+    font-size: 1.4rem;
+    line-height: 1;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.babble_panel_toggle:hover {
+    border-color: var(--accent);
+    color: var(--accent-dark);
+}
+
+.babble_panel.is-collapsed .babble_panel_toggle {
+    transform: rotate(-90deg);
+}
+
+.babble_panel_body {
+    overflow: hidden;
+    max-height: 600px;
+    opacity: 1;
+    margin-top: 16px;
+    transition: max-height 0.25s ease, opacity 0.2s ease, margin-top 0.25s ease;
+}
+
+.babble_panel.is-collapsed .babble_panel_body {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+}
+
+.babble_panel #setting {
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    text-align: left;
+}
+
+.babble_panel .cp_explain {
+    display: block;
+    margin: 16px 0 0;
+}
+
+#babble_status .note_status {
+    margin: 0 0 12px;
+}
+
+.babble-link {
+    stroke: var(--border);
+    stroke-width: 2px;
+    pointer-events: none;
+}
+
+.babble-node {
+    cursor: default;
+}
+
+.babble-node.is-expandable {
+    cursor: pointer;
+}
+
+.babble-avatar {
+    pointer-events: auto;
+}
+
+.babble-avatar-fallback {
+    fill: var(--accent-light);
+    pointer-events: auto;
+}
+
+.babble-anchor-icon {
+    pointer-events: none;
+}
+
+.babble-initial {
+    fill: var(--accent-dark);
+    font-weight: 700;
+    text-anchor: middle;
+    dominant-baseline: central;
+    pointer-events: none;
+    user-select: none;
+}
+
+.babble-ring {
+    fill: none;
+    stroke: var(--border);
+    stroke-width: 2px;
+    transition: stroke 0.15s, stroke-width 0.15s;
+}
+
+.babble-node.is-anchor .babble-ring {
+    stroke: var(--accent-dark);
+    stroke-width: 4px;
+}
+
+.babble-node.is-expandable:hover .babble-ring {
+    stroke: var(--accent);
+    stroke-width: 3px;
+}
+
+.babble-node.is-loading .babble-ring {
+    stroke: var(--accent);
+    stroke-dasharray: 8 6;
+    animation: babble-spin 1s linear infinite;
+}
+
+.babble-node.is-error .babble-ring {
+    stroke: #c0504d;
+    stroke-width: 3px;
+}
+
+@keyframes babble-spin {
+    to {
+        stroke-dashoffset: -28;
+    }
+}
