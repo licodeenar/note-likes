@@ -577,6 +577,12 @@ input[type=checkbox]:checked + .cp_checkbox_data_json::after {
     margin: 0;
 }
 
+@media (max-width: 480px) {
+    .babble_panel_header h1 {
+        font-size: 1.6rem;
+    }
+}
+
 .babble_panel_toggle {
     flex: none;
     width: 32px;
