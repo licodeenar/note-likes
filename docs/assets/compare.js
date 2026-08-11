@@ -99,7 +99,6 @@ function drawResult(dataA, dataB, idA, idB, elementId) {
 
     for (const u of common) {
         const rate = Math.round(u.matchRate * 100);
-        const aggregateUrl = 'index.html?id=' + encodeURIComponent(u.urlname) + '&key=article12';
         html += '<li class="note_item">' +
             '<div class="note_row">' +
             '<a class="note_user" href="' + escapeHtml(u.url) + '" target="_blank" rel="noopener">' +
@@ -113,7 +112,7 @@ function drawResult(dataA, dataB, idA, idB, elementId) {
             '</div>' +
             '<div class="detail">' +
             '<div class="btn-group">' +
-            '<a class="btn-sub" href="' + escapeHtml(aggregateUrl) + '">このユーザで集計</a>' +
+            '<button type="button" class="btn-sub" data-urlname="' + escapeHtml(u.urlname) + '">共通好きを探す</button>' +
             '</div>' +
             '</div>' +
             '</li>';
@@ -121,4 +120,11 @@ function drawResult(dataA, dataB, idA, idB, elementId) {
     html += '</ul>';
 
     document.getElementById(elementId).innerHTML = html;
+
+    document.getElementById(elementId).querySelectorAll('.btn-sub[data-urlname]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            document.getElementById('note_id_b').value = btn.getAttribute('data-urlname');
+            getCompare();
+        });
+    });
 }
