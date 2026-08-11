@@ -26,15 +26,16 @@
         <div id="babble_graph" class="babble_graph"></div>
 
         <div class="babble_panel" id="babble_panel">
-            <div class="babble_panel_header">
+            <div class="babble_panel_header" id="babble_panel_header" role="button" tabindex="0"
+                aria-expanded="true" aria-controls="babble_panel_body" aria-label="操作パネルの表示・非表示を切り替え"
+                onclick="toggleBabblePanel()"
+                onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleBabblePanel(); }">
                 <h1>【note】共通スキ バブル</h1>
-                <button type="button" class="babble_panel_toggle" id="babble_panel_toggle"
-                    aria-expanded="true" aria-controls="babble_panel_body" aria-label="折りたたむ"
-                    onclick="toggleBabblePanel()">
-                    <svg class="babble_panel_chevron" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <span class="babble_panel_toggle" aria-hidden="true">
+                    <svg class="babble_panel_chevron" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M6 9l6 6 6-6"></path>
                     </svg>
-                </button>
+                </span>
             </div>
 
             <div class="babble_panel_body" id="babble_panel_body">

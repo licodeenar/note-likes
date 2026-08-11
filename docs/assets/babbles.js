@@ -100,10 +100,10 @@ function setStatus(html) {
 
 function toggleBabblePanel() {
     const panel = document.getElementById('babble_panel');
-    const toggle = document.getElementById('babble_panel_toggle');
+    const header = document.getElementById('babble_panel_header');
     const collapsed = panel.classList.toggle('is-collapsed');
-    toggle.setAttribute('aria-expanded', String(!collapsed));
-    toggle.setAttribute('aria-label', collapsed ? '展開する' : '折りたたむ');
+    header.setAttribute('aria-expanded', String(!collapsed));
+    header.setAttribute('aria-label', collapsed ? '操作パネルを展開する' : '操作パネルを折りたたむ');
 }
 
 // dataA(起点ユーザーへのスキ提供者一覧)とdataTarget(比較対象へのスキ提供者一覧)の積集合を、一致率付きで返す
