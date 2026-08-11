@@ -571,8 +571,6 @@ input[type=checkbox]:checked + .cp_checkbox_data_json::after {
     border: 1px solid var(--border);
     background: var(--bg);
     color: var(--text-sub);
-    font-size: 1.4rem;
-    line-height: 1;
     padding: 0;
     cursor: pointer;
     display: flex;
@@ -584,6 +582,11 @@ input[type=checkbox]:checked + .cp_checkbox_data_json::after {
 .babble_panel_toggle:hover {
     border-color: var(--accent);
     color: var(--accent-dark);
+}
+
+.babble_panel_chevron {
+    display: block;
+    pointer-events: none;
 }
 
 .babble_panel.is-collapsed .babble_panel_toggle {
